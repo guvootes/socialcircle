@@ -6,5 +6,11 @@
 </head>
 <body>
 	
+	<script src="js/libs/jquery-1.7.1.min.js"></script>
+	<script src="js/libs/jquery.dateFormat-1.0.js"></script>
+	<script src="js/libs/underscore-min.js"></script>
+	<script src="js/libs/backbone-min.js"></script>
+	<script data-main="js/main" src="js/libs/require.js"></script>	
+	
 </body>
 </html>
