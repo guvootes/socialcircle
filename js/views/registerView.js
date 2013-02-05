@@ -2,9 +2,10 @@
 (function () {
 	"use strict";
 	define([
+		'models/userModel',
 		'text!templates/register.html',
 		
-	], function (template) {
+	], function (userModel, template) {
 
 		var registerView = Backbone.View.extend({
 			
@@ -14,6 +15,20 @@
 			},
 			
 			events: {
+				"submit form": "submitForm"
+			},
+			
+			submitForm: function(e){
+				e.preventDefault();
+				
+				var newUser = new userModel({
+					username: "",
+					password: "",
+					email: "",
+					birthday: ""
+				});
+				
+				newUser.save();
 			},
 
 			render: function () {
