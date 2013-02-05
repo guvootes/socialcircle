@@ -1,0 +1,14 @@
+* {
+   padding:0;
+   margin:0;
+}
+
+body{
+	background:#F4F4F4;
+}
+
+.container{
+	width: 680px;
+	background:#fff;
+	margin: 0 auto;
+}

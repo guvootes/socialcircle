@@ -1,14 +1,8 @@
 <?php 
 
-	Class Application{
+	Class Model{
 
 		protected $db;
-
-		public function __construct() {
-
-			$this->connect();
-
-		}
 
 		protected function connect(){
 

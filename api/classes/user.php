@@ -1,6 +1,6 @@
 <?php
 
-	Class User extends Application{
+	Class User{
 
 		public function add_user($data){
 
@@ -14,7 +14,7 @@
 			}
 
 			// Check if username exists
-			if( $this->in_use('username', $data['username'], 'users')){
+			if( $this->in_use('username', $data['username'])){
 				$errors['username'][] = 'Uw gekozen gebruikersnaam is al in gebruik, kies een andere gerbuikersnaam.';
 			}
 
@@ -25,7 +25,7 @@
 			}
 
 			// Check for email
-			if( $this->in_use('email', $data['email'], 'users')){
+			if( $this->in_use('email', $data['email'])){
 				$errors['email'][] = 'Uw e-mail adres is al in gebruik, gebruik een ander e-mail adres.';
 			}
 
@@ -39,40 +39,25 @@
 				$errors['birthday'][] = 'Uw geboortedatum is niet correct ingevoerd';
 			}
 
+			// return errors if they exists
 			if(!empty($errors)) return json_encode($errors);
 
+			// Encript password
 			$bcrypt = new Bcrypt(15);
 			$hash = $bcrypt->hash($data['password']);
 
-			$data[':username'] = ucfirst($data['username']);
-			$data[':email'] = strtolower($data['email']);
-			$data[':password'] = $hash;
-			$data[':birthday'] = $data['birthday'];
+			// Make new user model instance and add user
+			$user = new UserModel();
+			$status = $user->addUser(ucfirst($data['username']), strtolower($data['email']), $hash, $data['birthday']);
 
-			$sql = "INSERT INTO ".DB_PREFIX."users (username, email, password, birthday) VALUES (:username, :email, :password, :birthday)";
-
-			$sth = $this->db->prepare($sql);
-			$sth->execute($data);
-
-			if ( $sth->rowCount() > 0 ) {
-				$success = true;
-				return json_encode($success);
-			}else{
-				$errors['database'][] = 'Er heeft zich een onbekende fout opgetreden.';			
-			}
-
-			if(!empty($errors)) return json_encode($errors);
+			return $status;
 			
 		}
 
-		protected function in_use($key, $value, $table) {
+		protected function in_use($key, $value) {
 
-			$sql = 'SELECT COUNT(*) from '.DB_PREFIX.$table.' WHERE '.$key.' = ?';
-			$stmt = $this->db->prepare($sql);
-			$stmt->bindParam(1, $value, PDO::PARAM_INT);
-			$stmt->execute();
-
-			return $stmt->fetchColumn();
+			$user = new UserModel();
+			return $user->countUser($key, $value);
 
 		}
 
