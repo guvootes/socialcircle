@@ -1,21 +1,27 @@
 <?php
 	
 	// Require Slim Framework
+	require '../sc-config.php';
 	require 'Slim/Slim.php';
+	require 'classes/application.php';
+	require 'classes/user.php';
+	
 
 	// Init $app instance
-	\Slim\Slim::registerAutoloader();
-    $app = new \Slim\Slim();
+   	use Slim\Slim;
+	Slim::registerAutoloader();
 
+    $app = new Slim();
 
-    //////////////////////////////////////////////////
-    // Sample GET route   ////////////////////////////
-    //////////////////////////////////////////////////
-    
-    $app->get('/sample/', function () use ($app) {
-       $app->contentType('application/json');
-    	   
-    });
+    $app->post("/user", function () use($app, $user) {
 
+    	$app->response()->header("Content-Type", "application/json");
+    	$post = $app->request()->post();
 
+    	$user = new User;
+    	echo $user->add_user($post);
+
+	});
+
+    $app->run();
 ?>
