@@ -5,6 +5,10 @@
 	<title>Socialcircle</title>
 </head>
 <body>
+
+	<div class="content">
+		Home
+	</div>
 	
 	<script src="js/libs/jquery-1.7.1.min.js"></script>
 	<script src="js/libs/jquery.dateFormat-1.0.js"></script>

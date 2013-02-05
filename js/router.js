@@ -1,16 +1,27 @@
 (function () {
 	"use strict";
 	
-	define([], function() {
+	define([
+		'views/registerView'
+	], function(registerView) {
 		var AppRouter = Backbone.Router.extend({
 			
 			routes: {
+				'/registreer'		:	'showRegister',
 				'*path'				: 	'defaultAction'
 			},
 
+
+
 			defaultAction: function(actions){
-				console.log("Router defaultAction");	
+				console.log("Router defaultAction "+actions);	
+			},
+			
+			showRegister: function(){
+				registerView.render();
 			}
+			
+			
 		});
 
 		var initialize = function () {
