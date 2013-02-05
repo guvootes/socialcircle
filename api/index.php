@@ -3,6 +3,7 @@
 	// Require Slim Framework
 	require '../sc-config.php';
 	require 'Slim/Slim.php';
+	require 'classes/bcrypt.php';
 	require 'classes/application.php';
 	require 'classes/user.php';
 	

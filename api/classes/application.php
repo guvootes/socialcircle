@@ -29,7 +29,7 @@
 			$_SESSION['CSRF_TOKEN'] = $this->csrf;
 			return $this->csrf;
 		}
-
+	
 
 
 	}
