@@ -8,6 +8,26 @@
 				"json_encode"
 			],
 			[
+				"err",
+				"errorThrown"
+			],
+			[
+				"text",
+				"textStatus"
+			],
+			[
+				"enable",
+				"enabled"
+			],
+			[
+				"enab",
+				"enabled"
+			],
+			[
+				"jquery",
+				"jQuery.when	jQuery.when"
+			],
+			[
 				"message",
 				"Messagelist"
 			],
@@ -180,6 +200,17 @@
 	},
 	"file_history":
 	[
+		"/Users/rickootes/www/socialcircle/sc-config.sample.php",
+		"/Users/rickootes/www/socialcircle/sc.sublime-project",
+		"/Users/rickootes/www/socialcircle/sc-config.php",
+		"/Users/rickootes/www/socialcircle/test.php",
+		"/Users/rickootes/www/socialcircle/api/classes/bcrypt.php",
+		"/Users/rickootes/www/socialcircle/api/classes/user.php",
+		"/Users/rickootes/www/socialcircle/api/index.php",
+		"/Users/rickootes/www/socialcircle/api/classes/application.php",
+		"/Users/rickootes/www/socialcircle/api/classes/bcript.php",
+		"/Users/rickootes/www/socialcircle/api/user.php",
+		"/Users/rickootes/www/socialcircle/api/classes/core.php",
 		"/Users/rickootes/www/kringoosterkerk.nl/dev/oosterkerk.sublime-project",
 		"/private/etc/php.ini",
 		"/Users/rickootes/www/kringoosterkerk.nl/main/php/application",
@@ -236,6 +267,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"'",
+			"stmt",
+			"firstname",
+			"response",
+			"errors",
+			"dbCall",
+			"DB_",
+			"'el'",
+			"el'",
+			"el",
+			"`",
 			"message",
 			"appffw",
 			"class=\"desktop\"",

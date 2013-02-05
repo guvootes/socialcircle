@@ -100,9 +100,9 @@
 
 					$.ajax({
 						type: 'POST',
-						contentType: 'application/json',
+						// contentType: 'application/json',
 						url: 'api/user',
-						dataType: "json",
+						// dataType: "json",
 						data: this.values,
 						success: function(data, textStatus, jqXHR){
 							console.log(data);
