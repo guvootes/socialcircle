@@ -46,7 +46,7 @@
 			$bcrypt = new Bcrypt(15);
 			$hash = $bcrypt->hash($data['password']);
 
-			// Make new user model instance
+			// Make new user model instance and add user
 			$user = new UserModel();
 			$status = $user->addUser(ucfirst($data['username']), strtolower($data['email']), $hash, $data['birthday']);
 
