@@ -21,14 +21,20 @@
 			submitForm: function(e){
 				e.preventDefault();
 				
-				var newUser = new userModel({
-					username: "",
-					password: "",
-					email: "",
-					birthday: ""
-				});
+				var newUser = new userModel();
 				
-				newUser.save();
+				var data = {
+					email: this.$('#email').val(),
+					username:  this.$('#username').val()
+				}
+				 
+				newUser.save(data,{
+						error: function(model, error){ 
+							console.log(error);
+						}
+					}
+				);		
+				
 			},
 
 			render: function () {
