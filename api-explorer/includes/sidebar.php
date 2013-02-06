@@ -4,7 +4,10 @@
 		'class' => 'navigation',
 		'childClass' => 'children'
 	);
-
-	echo $app->getNav($args);
-
 ?>
+
+<section class="sidebar">
+<?php
+	echo $app->getNav($args);
+?>
+</section>

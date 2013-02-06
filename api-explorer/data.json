@@ -8,22 +8,41 @@
 				"username" : {
 					"element" : "input",
 					"type" : "text",
-					"required" : true
+					"validation" : {
+						"Min lenght" : 4,
+						"Max length" : 28,
+						"required" : true,
+						"description": "Letters and Numbers only" 
+					}
 				},
 				"email" : {
 					"element" : "input",
 					"type" : "email",
-					"required" : true
+					"validation" : {
+						"type": "email",
+						"required" : true,
+						"description" : "Checks if the email is correct and not in use"
+					}
 				},
 				"password" : {
 					"element" : "input",
 					"type" : "password",
-					"required" : true
+					"required" : true,
+					"validation" : {
+						"Min length" : 5,
+						"required" : true,
+						"description" : "No aditional validation required"
+					}
 				},
 				"birthday" : {
 					"element" : "input",
 					"type" : "date",
-					"required" : true
+					"validation" : {
+						"type" : "data",
+						"required" : true,
+						"description" : "valiates on date notation YYYY-MM-DD"	
+					}
+					
 				}
 			}
 		}

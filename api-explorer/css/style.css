@@ -1,14 +1,93 @@
+
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400);
+
 * {
    padding:0;
    margin:0;
 }
 
 body{
-	background:#F4F4F4;
+	font-family: 'Droid Sans', sans-serif;
 }
 
-.container{
-	width: 680px;
-	background:#fff;
-	margin: 0 auto;
+.mainheader{
+	float:left;
+	width: 100%;
+	height: 50px;
+	padding: 0 10px;
+	border-bottom: 1px solid #ccc;
+	background: #F1F1F1;
+	box-sizing: border-box;
 }
+
+h1 a{
+	color:#DD4B39;
+	font-size: 20px;
+	float:left;
+	height: 50px;
+	line-height: 50px;
+	text-shadow: 0px 1px 0px rgba(255,255,255,1);
+	text-decoration: none;
+	
+}
+
+.content{
+	width: 100%;
+	float:left;
+	padding: 0 0 0 220px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.sidebar{
+	position: absolute;
+	width: 220px;
+	left:0;
+}
+
+.sidebar ul{
+	list-style: none;
+}
+
+.navigation,
+.navigation li{
+	float:left;
+	width: 100%;
+}
+
+.navigation li a{
+	height: 40px;
+	line-height: 40px;
+	padding: 0 0 0 50px;
+	box-sizing: border-box;
+	float:left;
+	text-decoration: none;
+	color:#333;
+	width: 100%;
+	font-size: 16px;
+}
+
+.navigation li a:hover{
+	background:#F1F1F1;
+}
+
+.navigation li a.active{
+	color:#DD4B39;
+}
+
+.navigation .children{
+	display: none;
+}
+
+.navigation .children a{
+	font-size: 12px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.navigation .children.active{
+	display: block;
+}
+
+

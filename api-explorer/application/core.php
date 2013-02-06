@@ -29,15 +29,21 @@
 
 			// Loop trough data
 			foreach($this->data as $parent => $val):
-				$output .= "<li>";
-					$output .= $parent;
-
+				$active = (isset($_GET['p']) &&  $this->slug($parent) == $_GET['p'] ) ? 'active' : null;
+				$output .= "<li class='".$this->slug($parent)."'>";
+					$output .= '<a class="'.$active.'" href="?p='.$this->slug($parent).'">';
+						$output .= '<i></i>';
+						$output .= $parent;
+					$output .= '</a>';
 					// Loop trough key data
 					if(!empty($val)):
-						$output .= (isset($args['childClass'])) ? "<ul class='".$args["childClass"]."'>" : "<ul>";
+						$output .= (isset($args['childClass'])) ? "<ul class='".$args["childClass"]." ".$active."'>" : "<ul class='".$active."'>";
 						foreach($val as $child => $val):
-							$output .= "<li>";
-								$output .= $val->title;
+							$active = (isset($_GET['a']) &&  $this->slug($val->title) == $_GET['a'] ) ? 'active' : null;
+							$output .= "<li class='".$this->slug($val->title)."'>";
+								$output .= '<a class="'.$active.'" href="?p='.$this->slug($parent).'&a='.$this->slug($val->title).'">';
+									$output .= $val->title;
+								$output .= '</a>';
 							$output .= "</li>";	
 						endforeach;
 						$output .= "</ul>";
@@ -51,6 +57,30 @@
 			return $output;
 
 
+		}
+
+		static public function slug($input){ 
+		  // replace non letter or digits by -
+		  $output = preg_replace('~[^\\pL\d]+~u', '-', $input);
+
+		  // trim
+		  $output = trim($output, '-');
+
+		  // transliterate
+		  $output = iconv('utf-8', 'us-ascii//TRANSLIT', $output);
+
+		  // lowercase
+		  $output = strtolower($output);
+
+		  // remove unwanted characters
+		  $output = preg_replace('~[^-\w]+~', '', $output);
+
+		  if (empty($output))
+		  {
+		    return 'n-a';
+		  }
+
+		  return $output;
 		}
 
 	}

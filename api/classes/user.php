@@ -30,7 +30,7 @@
 			}
 
 			// Check for password length
-			if ( strlen($data['password']) <= 3 ) {
+			if ( strlen($data['password']) <= 5 ) {
 				$errors['password'][] = 'Uw wachtwoord is te kort, gebruik minimaal 3 tekens.';
 			}
 
