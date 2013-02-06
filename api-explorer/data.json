@@ -1,0 +1,31 @@
+{
+	"User" : {
+		"Add" : {
+			"title" : "Add User",
+			"path" : "/user",
+			"type" : "POST",
+			"data" : {
+				"username" : {
+					"element" : "input",
+					"type" : "text",
+					"required" : true
+				},
+				"email" : {
+					"element" : "input",
+					"type" : "email",
+					"required" : true
+				},
+				"password" : {
+					"element" : "input",
+					"type" : "password",
+					"required" : true
+				},
+				"birthday" : {
+					"element" : "input",
+					"type" : "date",
+					"required" : true
+				}
+			}
+		}
+	}
+}
