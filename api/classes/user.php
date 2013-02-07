@@ -6,8 +6,6 @@
 
 			// $data: username, email, password, birthday
 			
-			return json_encode($data);
-
 			$errors = array();
 
 			// Check for username length

@@ -8,6 +8,12 @@
 		{
 			"path": "./api",
 			"name": "API"
+		},
+		{
+			"path" : "./api-explorer",
+			"name": "API Explorer"
+
+
 		}
 	]
 }
