@@ -22,7 +22,7 @@
 				e.preventDefault();
 				
 				var self = this;
-				var newUser = new userModel();
+				
 				
 				var data = {
 					username	: this.$('#username').val(),
@@ -30,17 +30,20 @@
 					password	: this.$('#password').val(),
 					birthday	: this.$('#birthday').val()					
 				};
-				 
-				newUser.save(data,{
-					error: function(model, error){
-					
-						$(".formlist li").removeClass('error').find('span').remove();
-						 
-						self.showErrors(error);
-					},
+				
+				var newUser = new userModel(data);
+				console.log(newUser.toJSON());
+				 				 
+				newUser.save(newUser.toJSON(),{
 					succes: function(){
 						self.hideErrors();
+					},
+					
+					error: function(model, error){
+						$(".formlist li").removeClass('error').find('span').remove();
+						self.showErrors(error);
 					}
+					
 				});		
 				
 			},
