@@ -5,6 +5,8 @@
 		public function add_user($data){
 
 			// $data: username, email, password, birthday
+			
+			return json_encode($data);
 
 			$errors = array();
 

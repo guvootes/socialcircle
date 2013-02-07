@@ -1,8 +1,8 @@
 define([], function(){
 	var userModel = Backbone.Model.extend({
- 		defaults: {
-  			"role"		:  "user"
-  		},
+// 		defaults: {
+//  			"role"		:  "user"
+//  		},
   
   		url: 'api/user',
   
@@ -12,8 +12,6 @@ define([], function(){
 	  		// username validation
 	     	if (!attrs.username) {
 	        	errors.push({name: 'username', message: 'Vul een gebruikersnaam in'});
-	     	}else if(attrs.username.length < 4 ){
-	     		errors.push({name: 'username', message: 'De opgegeven naam is te kort'});
 	     	}
 	     	
 	     	// email validation
@@ -24,8 +22,6 @@ define([], function(){
 	     	// password validation
 	     	if (!attrs.password) {
 	     		errors.push({name: 'password', message: 'Vul een wachtwoord in'});
-	     	}else if(attrs.password.length < 5 ){
-	     		errors.push({name: 'password', message: 'Het wachtwoord moet ten minste 5 tekens bevatten'});
 	     	}
 	     	
 	     	// birthday validation
