@@ -37,6 +37,7 @@
 				newUser.save(newUser.toJSON(),{
 					succes: function(){
 						self.hideErrors();
+						console.log(newUser.toJSON());
 					},
 					
 					error: function(model, error){
