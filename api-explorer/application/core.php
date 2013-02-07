@@ -20,7 +20,7 @@
 
 		}
 
-		public function getNav($args){
+		public function getTopNav($args){
 
 			$output;
 
@@ -35,19 +35,6 @@
 						$output .= '<i></i>';
 						$output .= $parent;
 					$output .= '</a>';
-					// Loop trough key data
-					if(!empty($val)):
-						$output .= (isset($args['childClass'])) ? "<ul class='".$args["childClass"]." ".$active."'>" : "<ul class='".$active."'>";
-						foreach($val as $child => $val):
-							$active = (isset($_GET['a']) &&  $this->slug($val->title) == $_GET['a'] ) ? 'active' : null;
-							$output .= "<li class='".$this->slug($val->title)."'>";
-								$output .= '<a class="'.$active.'" href="?p='.$this->slug($parent).'&a='.$this->slug($val->title).'">';
-									$output .= $val->title;
-								$output .= '</a>';
-							$output .= "</li>";	
-						endforeach;
-						$output .= "</ul>";
-					endif;
 				$output .= "</li>";
 			endforeach;
 

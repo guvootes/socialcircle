@@ -1,16 +1,33 @@
 <?php 
 	require_once 'application/bootstrap.php';
 ?>
-<!DOCTYPE HTML>
-<html lang="en-US">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>API explorer</title>
-	<link rel="stylesheet" href="css/style.css" />
+	<title>&raquo; API explorer</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<header class="mainheader">  
-	<h1><a href="<?php echo EXPLORER_ROOT; ?>">API Explorer</a></h1>
-</header>
-<section class="content">
-	
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="<?php echo EXPLORER_ROOT; ?>">API Explorer</a>
+      <div class="nav-collapse collapse">
+        <?php 
+        	$args = array(
+        		'class' => 'navbar-fixed-top nav'
+        	);
+
+        	echo $app->getTopNav($args);
+
+        ?>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+<!-- /.navbar -->
