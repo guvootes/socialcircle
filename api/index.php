@@ -22,6 +22,8 @@
     	$post = json_decode($requestBody, true);
 
     	$user = new User;
+    	
+    	$app->response()->status(500);
     	echo $user->add_user($post);
 
 	});
