@@ -37,11 +37,7 @@
 				newUser.save(newUser.toJSON(),{
 					success: function(model, response){
 						console.log(model, response);
-//						var response  = JSON.parse(response.responseText);
-//					
-						$(".formlist li").removeClass('error').find('span').remove();
 						self.showResponse(response);
-
 					},
 					
 					error: function(model, response){
@@ -49,6 +45,8 @@
 						if(response.statusText){
 							alert(response.statusText);
 						}
+						
+						$('ul.formlist li span.helper').remove();
 
 						self.showResponse(response);
 					}
@@ -59,7 +57,8 @@
 			
 			showResponse: function(errors) {
 			    _.each(errors, function (error) {
-			        var controlGroup = this.$('#' + error.name).parent();
+			        var controlGroup = this.$('#' + error.name).parent(); 
+			        controlGroup.children('span').remove();
 			        controlGroup.addClass('error');
 			        controlGroup.append("<span class='helper'>"+error.message+"</span>");
 			    }, this);
