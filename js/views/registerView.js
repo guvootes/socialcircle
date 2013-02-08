@@ -35,21 +35,29 @@
 				console.log(newUser.toJSON());
 				 				 
 				newUser.save(newUser.toJSON(),{
-					succes: function(){
+					succes: function(model, response, options){
 						self.hideErrors();
 						console.log(newUser.toJSON());
+						$(".formlist li").removeClass('error').find('span').remove();
+						console.log(model, response, options);
+						
+						self.showResponse(response);
 					},
 					
-					error: function(model, error){
+					error: function(model, response){
+						console.log(model, response.responseText);
+						console.log(JSON.parse(response.responseText));
+						
+						
 						$(".formlist li").removeClass('error').find('span').remove();
-						self.showErrors(error);
+						self.showResponse(JSON.parse(response.responseText));
 					}
 					
 				});		
 				
 			},
 			
-			showErrors: function(errors) {
+			showResponse: function(errors) {
 			    _.each(errors, function (error) {
 			        var controlGroup = this.$('#' + error.name).parent();
 			        controlGroup.addClass('error');
