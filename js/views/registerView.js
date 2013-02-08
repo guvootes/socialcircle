@@ -40,17 +40,19 @@
 						console.log(newUser.toJSON());
 						$(".formlist li").removeClass('error').find('span').remove();
 						console.log(model, response, options);
-						
+
 						self.showResponse(response);
 					},
 					
 					error: function(model, response){
-						console.log(model, response.responseText);
-						console.log(JSON.parse(response.responseText));
+						if(response.responseText){
+							var response  = JSON.parse(response.responseText);
+						}
 						
+						console.log(response);
 						
 						$(".formlist li").removeClass('error').find('span').remove();
-						self.showResponse(JSON.parse(response.responseText));
+						self.showResponse(response);
 					}
 					
 				});		

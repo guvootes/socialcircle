@@ -5,38 +5,50 @@
 		public function add_user($data){
 
 			// $data: username, email, password, birthday
-			
+
 			$errors = array();
 
 			// Check for username length
 			if ( !preg_match("/^[a-z\d_]{4,28}$/i", $data['username'])) {
-				$errors['username'] = 'Kies een gebruikersnaam tussen de 4 en 28 tekens lang. aleen nummers en cijfers toegestaan';
+				$name = "username";
+				$message = 'Kies een gebruikersnaam tussen de 4 en 28 tekens lang. aleen nummers en cijfers toegestaan';
+				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 			// Check if username exists
-			else if( $this->in_use('username', $data['username'])){
-				$errors['username'] = 'Uw gekozen gebruikersnaam is al in gebruik, kies een andere gerbuikersnaam.';
+			if( $this->in_use('username', $data['username'])){				
+				$name = "username";
+				$message = 'Uw gekozen gebruikersnaam is al in gebruik, kies een andere gerbuikersnaam.';
+				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 
 			// Check for email
-			if( !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9+-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i", $data['email'])){
-				$errors['email'] = 'Uw e-mail adres is niet geldig.';
+			if( !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9+-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i", $data['email'])){				
+				$name = "email";
+				$message = 'Uw e-mail adres is niet geldig.';
+				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 			// Check for email
 			if( $this->in_use('email', $data['email'])){
-				$errors['email'] = 'Uw e-mail adres is al in gebruik, gebruik een ander e-mail adres.';
+				$name = "email";
+				$message = 'Uw e-mail adres is al in gebruik, gebruik een ander e-mail adres.';
+				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 			// Check for password length
-			if ( strlen($data['password']) <= 5 ) {
-				$errors['password'] = 'Uw wachtwoord is te kort, gebruik minimaal 3 tekens.';
+			if ( strlen($data['password']) <= 5 ) {				
+				$name = "password";
+				$message = 'Uw wachtwoord is te kort, gebruik minimaal 3 tekens.';
+				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 			// Check birthdate
 			if(!preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $data['birthday'])){
-				$errors['birthday'] = 'Uw geboortedatum is niet correct ingevoerd';
+				$name = "username";
+				$message = 'Uw geboortedatum is niet correct ingevoerd';
+				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 			// return errors if they exists
