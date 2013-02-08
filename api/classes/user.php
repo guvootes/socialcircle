@@ -1,7 +1,7 @@
 <?php
 
 	Class User{
-
+	
 		public function add_user($data){
 
 			// $data: username, email, password, birthday
@@ -11,14 +11,14 @@
 			// Check for username length
 			if ( !preg_match("/^[a-z\d_]{4,28}$/i", $data['username'])) {
 				$name = "username";
-				$message = 'Kies een gebruikersnaam tussen de 4 en 28 tekens lang. aleen nummers en cijfers toegestaan';
+				$message = 'Kies een gebruikersnaam tussen de 4 en 28 tekens lang. Aleen nummers en cijfers toegestaan';
 				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 			// Check if username exists
 			if( $this->in_use('username', $data['username'])){				
 				$name = "username";
-				$message = 'Uw gekozen gebruikersnaam is al in gebruik, kies een andere gerbuikersnaam.';
+				$message = 'Uw gekozen gebruikersnaam is al in gebruik, kies een andere gebruikersnaam.';
 				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
@@ -26,14 +26,14 @@
 			// Check for email
 			if( !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9+-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i", $data['email'])){				
 				$name = "email";
-				$message = 'Uw e-mail adres is niet geldig.';
+				$message = 'Uw e-mailadres is niet geldig.';
 				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 			// Check for email
 			if( $this->in_use('email', $data['email'])){
 				$name = "email";
-				$message = 'Uw e-mail adres is al in gebruik, gebruik een ander e-mail adres.';
+				$message = 'Uw e-mailadres is al in gebruik';
 				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
@@ -52,7 +52,9 @@
 			}
 
 			// return errors if they exists
-			if(!empty($errors)) return json_encode($errors);
+			if(!empty($errors)){
+				return json_encode($errors);
+			}
 
 			// Encript password
 			$bcrypt = new Bcrypt(15);
