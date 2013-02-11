@@ -2,12 +2,12 @@
 (function () {
 	"use strict";
 	define([
-		'models/userModel',
-		'text!templates/register.html',
+		'models/loginModel',
+		'text!templates/login.html',
 		
-	], function (userModel, template) {
+	], function (loginModel, template) {
 
-		var registerView = Backbone.View.extend({
+		var loginView = Backbone.View.extend({
 			
 			el: $(".content"),
 			
@@ -15,7 +15,7 @@
 			},
 			
 			events: {
-				"submit form#registerform": "submitForm"
+				"submit form#loginform": "submitForm"
 			},
 			
 			submitForm: function(e){
@@ -25,16 +25,15 @@
 				
 				
 				var data = {
-					username	: this.$('#username').val(),
 					email		: this.$('#email').val(),
-					password	: this.$('#password').val(),
-					birthday	: this.$('#birthday').val()					
+					password	: this.$('#password').val()				
 				};
 				
-				var newUser = new userModel(data);
-				console.log(newUser.toJSON());
+				var newLogin = new loginModel(data);
+				
+				console.log(newLogin.toJSON());
 				 				 
-				newUser.save(newUser.toJSON(),{
+				newLogin.save(newLogin.toJSON(),{
 					success: function(model, response){
 						console.log(model, response);
 						self.showResponse(response);
@@ -76,6 +75,6 @@
 			
 		});
 		
-		return new registerView();
+		return new loginView();
 	});
 }());

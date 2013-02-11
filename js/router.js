@@ -2,8 +2,9 @@
 	"use strict";
 	
 	define([
-		'views/registerView'
-	], function(registerView) {
+		'views/registerView',
+		'views/loginView'
+	], function(registerView, loginView) {
 		var AppRouter = Backbone.Router.extend({
 			
 			routes: {
@@ -14,7 +15,7 @@
 
 
 			defaultAction: function(actions){
-				console.log("Router defaultAction "+actions);	
+				loginView.render();	
 			},
 			
 			showRegister: function(){
