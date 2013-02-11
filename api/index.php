@@ -1,5 +1,5 @@
 <?php
-	
+
 	// Require Slim Framework
 	require '../sc-config.php';
 	require 'Slim/Slim.php';

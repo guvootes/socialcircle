@@ -1,6 +1,8 @@
 <?php
 
 	Class UserModel extends Model {
+	
+		protected $user;
 
 		public function __construct() {
 			$this->connect();
@@ -23,6 +25,22 @@
 				return true;
 			}
 
+		}
+		
+		public function getUserByEmail($email){
+			$data[':email'] = $email;
+			$sql = 'SELECT * FROM '.DB_PREFIX.'users WHERE email = :email LIMIT 1';	
+			$sth = $this->db->prepare($sql);
+			$sth->execute($data);	
+			
+			$result = $sth->fetch();
+			$this->user = $result;			
+		}
+		
+		public function getHash(){
+					
+			return $this->user['password'];
+			
 		}
 
 		public function countUser($key, $value){

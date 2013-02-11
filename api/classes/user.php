@@ -90,7 +90,21 @@
 		}
 
 		protected function is_match($email, $password){
-			return false;
+			
+			$bcrypt = new Bcrypt(15);
+			
+			$user = new UserModel();
+			$user->getUserByEmail($email);
+			
+			$hash = $user->getHash();
+			
+				
+			$isGood = $bcrypt->verify($password, $hash);	
+			
+			echo $isGood;		
+			
+			return $isGood;
+			
 		}
 
 		protected function in_use($key, $value) {
