@@ -2,6 +2,27 @@
 
 	Class User{
 	
+		public function check_user($data){
+		
+			$errors = array();
+			
+			if(! $this->in_use('email', $data['email'])){
+				$name = "email";
+				$message = 'Je e-mailadres is niet bekend met ons systeem';
+				array_push($errors, array("message" => $message, "name" => $name));
+			}elseif(! $this->is_match($data['email'], $data['password'])){
+				$name = "password";
+				$message = 'Het wachtwoord is niet correct';
+				array_push($errors, array("message" => $message, "name" => $name));
+			}else{
+				return true;
+			}
+			
+			if(!empty($errors)){
+				return json_encode($errors);
+			}
+		}
+		
 		public function add_user($data){
 
 			// $data: username, email, password, birthday
@@ -66,6 +87,10 @@
 
 			return $status;
 			
+		}
+
+		protected function is_match($email, $password){
+			return false;
 		}
 
 		protected function in_use($key, $value) {
