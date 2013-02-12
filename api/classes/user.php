@@ -93,15 +93,17 @@
 			
 			$bcrypt = new Bcrypt(15);
 			
-			$user = new UserModel();
+			$user = new UserModel;
+
+			// Load user into User.Model
 			$user->getUserByEmail($email);
 			
+			// Get hash from retrieved user
 			$hash = $user->getHash();
-			
-				
+
+
+			// verify if password matches hash
 			$isGood = $bcrypt->verify($password, $hash);	
-			
-			echo $isGood;		
 			
 			return $isGood;
 			
