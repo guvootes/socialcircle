@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.1.44)
 # Database: sc_db
-# Generation Time: 2013-02-05 20:44:07 +0000
+# Generation Time: 2013-02-12 20:08:11 +0000
 # ************************************************************
 
 
@@ -29,8 +29,9 @@ CREATE TABLE `sc_users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL DEFAULT '',
   `email` varchar(30) NOT NULL DEFAULT '',
-  `password` varchar(30) NOT NULL DEFAULT '',
+  `password` varchar(265) NOT NULL DEFAULT '',
   `birthday` date DEFAULT NULL,
+  `role` varchar(10) DEFAULT 'user',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
