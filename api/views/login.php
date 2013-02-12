@@ -6,7 +6,7 @@
 		$requestBody = $app->request()->getBody();  // <- getBody() of http request
 		$post = json_decode($requestBody, true);
 		
-		$user = new User();
+		$user = new UserController();
 		echo $user->get_user($post);
 	
 	});

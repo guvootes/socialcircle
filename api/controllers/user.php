@@ -1,6 +1,6 @@
 <?php
 
-	Class User{
+	Class UserController{
 	
 		public function get_user($data){
 
@@ -107,6 +107,7 @@
 			$verification = $bcrypt->verify($password, $hash);		
 
 			$response = new stdClass;
+			$response->id = $user['id'];
 			$response->username = $user['username'];
 			$response->email = $user['email'];
 			$response->role = $user['role'];

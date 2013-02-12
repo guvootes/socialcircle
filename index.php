@@ -1,3 +1,5 @@
+<?php $test = "hoi"; ?>
+
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>

@@ -3,7 +3,7 @@
 	"use strict";
 	define([
 		'models/loginModel',
-		'text!templates/login.html',
+		'text!templates/login.php',
 		
 	], function (loginModel, template) {
 
