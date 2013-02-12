@@ -55,6 +55,13 @@
 		}
 
 
+		public function getUser(){
+
+			return $this->user;
+
+		}
+
+
 
 	}
 

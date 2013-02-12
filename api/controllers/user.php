@@ -2,27 +2,29 @@
 
 	Class User{
 	
-		public function check_user($data){
+		public function get_user($data){
+
+			// $data: email, password
 		
 			$errors = array();
-			
-			if(! $this->in_use('email', $data['email'])){
-				$name = "email";
-				$message = 'Je e-mailadres is niet bekend met ons systeem';
-				array_push($errors, array("message" => $message, "name" => $name));
-			}elseif(! $this->is_match($data['email'], $data['password'])){
-				$name = "password";
-				$message = 'Het wachtwoord is niet correct';
-				array_push($errors, array("message" => $message, "name" => $name));
+
+			$user = $this->getUserModel($data['email'], $data['password']);
+
+			if($user){
+				
+				$_SESSION['user'] = $user;
+
+				return json_encode($user);
 			}else{
-				return true;
-			}
-			
-			if(!empty($errors)){
+				$name = "email";
+				$message = 'Je e-mailadres en/of wachtwoord is onjuist';
+				array_push($errors, array("message" => $message, "name" => $name));
+
 				return json_encode($errors);
 			}
+
 		}
-		
+
 		public function add_user($data){
 
 			// $data: username, email, password, birthday
@@ -89,21 +91,27 @@
 			
 		}
 
-		protected function is_match($email, $password){
+		protected function getUserModel($email, $password){
 			
 			$bcrypt = new Bcrypt(15);
 			
-			$user = new UserModel();
-			$user->getUserByEmail($email);
+			// Make new usermodel instance
+			$model = new UserModel();
 			
-			$hash = $user->getHash();
+			$model->getUserByEmail($email);
 			
-				
-			$isGood = $bcrypt->verify($password, $hash);	
+			$user = $model->getUser();
+			$hash = $user['password'];
 			
-			echo $isGood;		
+			// Verify password input with database hashs
+			$verification = $bcrypt->verify($password, $hash);		
+
+			$response = new stdClass;
+			$response->username = $user['username'];
+			$response->email = $user['email'];
+			$response->role = $user['role'];
 			
-			return $isGood;
+			if($verification) return $response;
 			
 		}
 

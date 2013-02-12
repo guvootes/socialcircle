@@ -1,4 +1,9 @@
-<?php ini_set('display_errors', 1); ?> 
+<?php 
+	ini_set('display_errors', 1); 
+
+	// start session
+	session_start();
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,19 +17,36 @@
 <body>
 
 	<?php 
+
+	// Require config
+	require '../sc-config.php';
 	
-		// Require Slim Framework
-		require '../sc-config.php';
-		require 'classes/bcrypt.php';
-		require 'classes/model.php';
-		require 'classes/user.model.php';
-		require 'classes/user.php';
-		
-		$user = new User();
-		echo $user->check_user($_GET);
-	
-	
+	// Require libraries
+	require 'libs/bcrypt.php';
+
+	// Require models
+	require 'models/model.php';
+	require 'models/user.php';
+
+	// Require controllers
+	require 'controllers/user.php';
+
 	?>
+	<pre>
+
+	<?php
+		$user = new User();
+		print_r(json_decode($user->get_user($_GET)));
+
+		echo '////////////////////////////';
+
+		print_r($_SESSION);
+
+
+
+	?>
+
+	</pre>
 	
 </body>
 </html>
