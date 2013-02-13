@@ -1,8 +1,5 @@
 <?php
 
-// start session
-session_start();
-
 // Require config
 require '../sc-config.php';
 
@@ -17,6 +14,7 @@ require 'models/model.php';
 require 'models/user.php';
 
 // Require controllers
+require 'controllers/controller.php';
 require 'controllers/user.php';
 
 

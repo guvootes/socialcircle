@@ -29,6 +29,7 @@
 	require 'models/user.php';
 
 	// Require controllers
+	require 'controllers/controller.php';
 	require 'controllers/user.php';
 
 	?>
@@ -37,6 +38,8 @@
 	<?php
 		$user = new UserController();
 		print_r(json_decode($user->get_user($_GET)));
+
+		$user->checkUser();
 
 		echo '////////////////////////////';
 

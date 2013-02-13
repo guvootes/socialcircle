@@ -1,6 +1,6 @@
-<?php
+	<?php
 
-	Class UserController{
+	Class UserController extends Controller{
 	
 		public function get_user($data){
 
@@ -9,7 +9,6 @@
 			$errors = array();
 
 			$user = $this->getUserModel($data['email'], $data['password']);
-
 
 			// Set Login attempts if it's not set already
 			if ( !isset($_SESSION['LOGIN_ATTEMPTS']) ){
@@ -24,13 +23,11 @@
 
 				array_push($errors, array("message" => $message, "name" => $name));
 				return json_encode($errors);
-				
+
 			}
 
-
-
 			if($user){
-				
+
 				$_SESSION['user'] = $user;
 
 				return json_encode($user);
@@ -125,13 +122,19 @@
 			$hash = $user['password'];
 			
 			// Verify password input with database hashs
-			$verification = $bcrypt->verify($password, $hash);		
+			$verification = $bcrypt->verify($password, $hash);	
 
+			// set IP and user agent
+			$ipAddress	= $_SERVER['REMOTE_ADDR'];
+			$userBrowser = $_SERVER['HTTP_USER_AGENT'];
+
+			// Make response object
 			$response = new stdClass;
 			$response->id = $user['id'];
 			$response->username = $user['username'];
 			$response->email = $user['email'];
 			$response->role = $user['role'];
+			$response->loginString = hash('sha512', $user['password'].$ipAddress.$userBrowser);
 			
 			if($verification) return $response;
 			
