@@ -35,7 +35,7 @@
 	<pre>
 
 	<?php
-		$user = new User();
+		$user = new UserController();
 		print_r(json_decode($user->get_user($_GET)));
 
 		echo '////////////////////////////';

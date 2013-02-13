@@ -10,6 +10,25 @@
 
 			$user = $this->getUserModel($data['email'], $data['password']);
 
+
+			// Set Login attempts if it's not set already
+			if ( !isset($_SESSION['LOGIN_ATTEMPTS']) ){
+				$_SESSION['LOGIN_ATTEMPTS'] = 0;
+			}
+
+			// Return error if the're to many login atempts
+			if ($_SESSION['LOGIN_ATTEMPTS'] >= NUMBER_OF_ATTEMPTS) {
+
+				$name = "email";
+				$message = "U heeft te vaak een verkeerd wachtoord ingevoerd, kom later terug.";
+
+				array_push($errors, array("message" => $message, "name" => $name));
+				return json_encode($errors);
+				
+			}
+
+
+
 			if($user){
 				
 				$_SESSION['user'] = $user;
@@ -18,8 +37,10 @@
 			}else{
 				$name = "email";
 				$message = 'Je e-mailadres en/of wachtwoord is onjuist';
-				array_push($errors, array("message" => $message, "name" => $name));
 
+				$_SESSION['LOGIN_ATTEMPTS'] += 1;
+
+				array_push($errors, array("message" => $message, "name" => $name));
 				return json_encode($errors);
 			}
 
