@@ -15,10 +15,15 @@
 			</div>
 		</li>
 		<li class="control-group">
+			<div class="controls">
+				<a href="#">Wachtwoord vergeten?</a>
+			</div>
+		</li>
+		<li class="control-group">
 		    <div class="controls">
 		    	<input type="hidden" name="csrf_field" />
 		    	<button type="submit" value="Submit" class='btn btn-primary'>Login</button>
-		    	<button type="button" class="btn" id="register">Registreer</button>
+		    	<a href="./#/registreer" class="btn" id="register">Registreer</a>
 		    </div>
 		</li>
 		

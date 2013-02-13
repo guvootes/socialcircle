@@ -3,10 +3,9 @@
 	"use strict";
 	define([
 		'models/loginModel',
-		'text!templates/login.php',
-		'text!templates/register.php'
+		'text!templates/login.php'
 		
-	], function (loginModel, template, registerTemplate) {
+	], function (loginModel, template, app) {
 
 		var loginView = Backbone.View.extend({
 			
@@ -16,17 +15,13 @@
 			},
 			
 			events: {
-				"submit form#loginform": "submitForm",
-				"click button#register": "goToRegisterpage"
-			},
-			
-			goToRegisterpage: function(){
-				console.log("do something");
-				this.$el.html(registerTemplate);
+				"submit form#loginform": "submitForm"
 			},
 			
 			submitForm: function(e){
 				e.preventDefault();
+				
+				this.hideErrors();
 				
 				var self = this;
 				
@@ -72,7 +67,7 @@
 			 
 			hideErrors: function () {
 			    this.$('.formlist li').removeClass('error');
-			    this.$('.helper').remove();
+			    this.$('.help-inline').remove();
 			},
 
 			render: function () {

@@ -56,17 +56,19 @@
 			},
 			
 			showResponse: function(errors) {
+				this.hideErrors();
+			
 			    _.each(errors, function (error) {
 			        var controlGroup = this.$('#' + error.name).parent(); 
 			        controlGroup.children('span').remove();
-			        controlGroup.addClass('error');
-			        controlGroup.append("<span class='helper'>"+error.message+"</span>");
+			        controlGroup.parent().addClass('error');
+			        controlGroup.append("<span class='help-inline'>"+error.message+"</span>");
 			    }, this);
 			},
 			 
 			hideErrors: function () {
 			    this.$('.formlist li').removeClass('error');
-			    this.$('.helper').remove();
+			    this.$('.help-inline').remove();
 			},
 
 			render: function () {
