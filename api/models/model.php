@@ -19,28 +19,31 @@
 
 		public function getAttempts($userId){
 
-			$now = date('Y-m-d H:i:s');
-			// All login attempts are counted from the past 2 hours. 
-			$validAttempts = $now - (2 * 60 * 60);
+			$now = time();
 
-			$sql = 'SELECT dateTime FROM '.DB_PREFIX.'login_attempts WHERE user_id = ? AND dateTime > '.$validAttempts;
+		   // All login attempts are counted from the past 2 hours. 
+		   $validAttempts = $now - (2 * 60 * 60); 
+
+			$sql = 'SELECT time FROM '.DB_PREFIX.'login_attempts WHERE user_id = ? AND time > '.$validAttempts;
 
 			$stmt = $this->db->prepare($sql); 
 
 			$stmt->bindParam(1, $userId, PDO::PARAM_INT);
 			$stmt->execute(); // Execute the prepared query.
 
+			echo 'rows => '.$stmt->rowCount();
+
 			return $stmt->rowCount();
 		}
 
 		public function addLoginAttempt($userId) {
 
-			$now = date('Y-m-d H:i:s');
+			$now = time();
 
 			$data[':id'] = $userId;
-			$data[':dateTime'] = $now;
+			$data[':time'] = $now;
 
-			$sql = "INSERT INTO ".DB_PREFIX."login_attempts (user_id, datetime) VALUES (:id, :dateTime)";
+			$sql = "INSERT INTO ".DB_PREFIX."login_attempts (user_id, time) VALUES (:id, :time)";
 
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute($data);

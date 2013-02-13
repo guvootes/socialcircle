@@ -18,7 +18,7 @@
 				if($this->checkBrute($this->user->id)){
 
 					$name = "username";
-					$message = 'Je account is geblokkeerd';
+					$message = 'Je account is tijdelijk geblokkeerd.';
 					array_push($errors, array("message" => $message, "name" => $name));
 					return json_encode($errors);
 
