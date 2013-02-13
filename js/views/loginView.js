@@ -4,7 +4,7 @@
 	define([
 		'models/loginModel',
 		'text!templates/login.php',
-		'text!templates/register.html'
+		'text!templates/register.php'
 		
 	], function (loginModel, template, registerTemplate) {
 

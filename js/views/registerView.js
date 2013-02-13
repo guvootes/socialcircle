@@ -3,7 +3,7 @@
 	"use strict";
 	define([
 		'models/userModel',
-		'text!templates/register.html',
+		'text!templates/register.php',
 		
 	], function (userModel, template) {
 
