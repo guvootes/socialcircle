@@ -6,7 +6,8 @@
 					$secure,
 					$httponly,
 					$cookieParams,
-					$user;	
+					$user,
+					$loginString;	
 
 		public function _contruct(){
 
@@ -17,7 +18,7 @@
 		protected function startSecureSession () {
 
 			// Set a custom session name
-			$this->session_name = 'sec_session_id'; 
+			$this->session_name = 'secureSessionID'; 
 
 			// Set to true if using https.
 	        $this->$secure = false; 
@@ -46,14 +47,40 @@
 
 		public function checkUser(){
 
-			$this->user = $_SESSION['user'];
+			if(isset($_SESSION['user'], $_SESSION['loginString'])){
 
-			// do some checks
-			
+				$this->user = $_SESSION['user'];
+				$this->loginString = $_SESSION['loginString'];
+
+				$ipAddress = $_SERVER['REMOTE_ADDR']; // Get the IP address of the user. 
+     			$userBrowser = $_SERVER['HTTP_USER_AGENT']; // Get the user-agent string of the user.
+
+     			$userModel = new UserModel;
+     			$password = $userModel->getHashById($this->user->id);
+
+     			$loginCheck = hash('sha512', $password.$ipAddress.$userBrowser);
+
+     			if($loginCheck == $this->loginString){
+     				return true;
+     			}
+
+			}else{
+				return false;
+			}
 		}
 
+		public function checkBrute($userId){
 
+			$model = new Model;
+			$attempts = $model->getAttempts($userId);
 
+			if($attempts >= NUMBER_OF_ATTEMPTS){
+				return true;
+			}else{
+				return false;
+			}
+
+		}
 	}
 
 

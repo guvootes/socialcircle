@@ -5,7 +5,7 @@
 		protected $user;
 
 		public function __construct() {
-			$this->connect();
+			parent::__construct();
 		}
 
 
@@ -18,10 +18,10 @@
 
 			$sql = "INSERT INTO ".DB_PREFIX."users (username, email, password, birthday) VALUES (:username, :email, :password, :birthday)";
 
-			$sth = $this->db->prepare($sql);
-			$sth->execute($data);
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute($data);
 
-			if($sth->rowCount() > 0){
+			if($stmt->rowCount() > 0){
 				return true;
 			}
 
@@ -30,11 +30,14 @@
 		public function getUserByEmail($email){
 			$data[':email'] = $email;
 			$sql = 'SELECT * FROM '.DB_PREFIX.'users WHERE email = :email LIMIT 1';	
-			$sth = $this->db->prepare($sql);
-			$sth->execute($data);	
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute($data);	
 			
-			$result = $sth->fetch();
-			$this->user = $result;			
+			$result = $stmt->fetch();
+			$this->user = $result;		
+
+			return $stmt->rowCount();
+
 		}
 		
 		public function getHash(){
@@ -61,8 +64,29 @@
 
 		}
 
+		public function getHashById($userId){
 
+			if ($stmt = $this->db->prepare('SELECT password FROM '.DB_PREFIX.'users WHERE id = ? LIMIT 1')) { 
 
+				$stmt->bindParam(1, $userId, PDO::PARAM_INT);
+				$stmt->execute(); // Execute the prepared query.
+
+        		if($stmt->rowCount() == 1) {
+
+        			$password = $stmt->fetch();
+
+           			return $password['password'];
+
+        		}else{
+        			return false;
+        		}
+
+			}else{
+
+				return false;
+
+			}
+		}
 	}
 
 ?>

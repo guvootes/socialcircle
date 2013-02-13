@@ -1,6 +1,9 @@
 	<?php
 
 	Class UserController extends Controller{
+
+		protected 	$user,
+					$verification;
 	
 		public function get_user($data){
 
@@ -8,35 +11,43 @@
 		
 			$errors = array();
 
-			$user = $this->getUserModel($data['email'], $data['password']);
+			$rowCount = $this->getUserModel($data['email'], $data['password']);
 
-			// Set Login attempts if it's not set already
-			if ( !isset($_SESSION['LOGIN_ATTEMPTS']) ){
-				$_SESSION['LOGIN_ATTEMPTS'] = 0;
-			}
+			if($rowCount){
 
-			// Return error if the're to many login atempts
-			if ($_SESSION['LOGIN_ATTEMPTS'] >= NUMBER_OF_ATTEMPTS) {
+				if($this->checkBrute($this->user->id)){
 
-				$name = "email";
-				$message = "U heeft te vaak een verkeerd wachtoord ingevoerd, kom later terug.";
+					$name = "username";
+					$message = 'Je account is geblokkeerd';
+					array_push($errors, array("message" => $message, "name" => $name));
+					return json_encode($errors);
 
-				array_push($errors, array("message" => $message, "name" => $name));
-				return json_encode($errors);
+				}
 
-			}
+				// check if account is verificated
+				if(	$this->verification){
 
-			if($user){
+					// Set user in Session and return user object
+					$_SESSION['user'] = $this->user;
+					return json_encode($this->user);
 
-				$_SESSION['user'] = $user;
+				}else{
 
-				return json_encode($user);
+					// Add attempt 
+					$model = new Model;
+					$model->addLoginAttempt($this->user->id);
+
+					// Return error
+					$name = 'password';
+					$message = 'Je wachtwoord is onjuist ingevoerd';
+					array_push($errors, array("message" => $message, "name" => $name));
+					return json_encode($errors);
+					
+				}
+
 			}else{
 				$name = "email";
-				$message = 'Je e-mailadres en/of wachtwoord is onjuist';
-
-				$_SESSION['LOGIN_ATTEMPTS'] += 1;
-
+				$message = 'Je e-mailadres is onjuist';
 				array_push($errors, array("message" => $message, "name" => $name));
 				return json_encode($errors);
 			}
@@ -116,13 +127,13 @@
 			// Make new usermodel instance
 			$model = new UserModel();
 			
-			$model->getUserByEmail($email);
+			if (!$rowCount = $model->getUserByEmail($email)) return false;
 			
 			$user = $model->getUser();
 			$hash = $user['password'];
 			
 			// Verify password input with database hashs
-			$verification = $bcrypt->verify($password, $hash);	
+			$this->verification = $bcrypt->verify($password, $hash);	
 
 			// set IP and user agent
 			$ipAddress	= $_SERVER['REMOTE_ADDR'];
@@ -134,9 +145,14 @@
 			$response->username = $user['username'];
 			$response->email = $user['email'];
 			$response->role = $user['role'];
-			$response->loginString = hash('sha512', $user['password'].$ipAddress.$userBrowser);
+
+			$this->user = $response;
+
+			if($this->verification) 
+				$_SESSION['loginString'] = hash('sha512', $user['password'].$ipAddress.$userBrowser);
+
+			return $rowCount;
 			
-			if($verification) return $response;
 			
 		}
 

@@ -38,11 +38,6 @@
 	<?php
 		$user = new UserController();
 		print_r(json_decode($user->get_user($_GET)));
-
-		$user->checkUser();
-
-		echo '////////////////////////////';
-
 		print_r($_SESSION);
 
 
