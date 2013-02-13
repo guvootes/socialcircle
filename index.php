@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Socialcircle</title>
 	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="css/bootstrap.css" />
 </head>
 <body>
 
@@ -14,6 +15,7 @@
 	</div>
 	
 	<script src="js/libs/jquery-1.7.1.min.js"></script>
+	<script src="js/libs/bootstrap.js"></script>
 	<script src="js/libs/jquery.dateFormat-1.0.js"></script>
 	<script src="js/libs/underscore-min.js"></script>
 	<script src="js/libs/backbone-min.js"></script>

@@ -4,8 +4,9 @@
 	define([
 		'models/loginModel',
 		'text!templates/login.php',
+		'text!templates/register.html'
 		
-	], function (loginModel, template) {
+	], function (loginModel, template, registerTemplate) {
 
 		var loginView = Backbone.View.extend({
 			
@@ -15,7 +16,13 @@
 			},
 			
 			events: {
-				"submit form#loginform": "submitForm"
+				"submit form#loginform": "submitForm",
+				"click button#register": "goToRegisterpage"
+			},
+			
+			goToRegisterpage: function(){
+				console.log("do something");
+				this.$el.html(registerTemplate);
 			},
 			
 			submitForm: function(e){
@@ -58,8 +65,8 @@
 			    _.each(errors, function (error) {
 			        var controlGroup = this.$('#' + error.name).parent(); 
 			        controlGroup.children('span').remove();
-			        controlGroup.addClass('error');
-			        controlGroup.append("<span class='helper'>"+error.message+"</span>");
+			        controlGroup.parent().addClass('error');
+			        controlGroup.append("<span class='help-inline'>"+error.message+"</span>");
 			    }, this);
 			},
 			 

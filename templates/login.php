@@ -1,17 +1,26 @@
-<h1>Login</h1>
-<form id="loginform" method="post">
-	<ul class="formlist">
-		<li>
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email" />
-		</li>
-		<li>
-			<label for="password">Password</label>
-			<input type="password" name="password" id="password" />
-		</li>
-	</ul>
-	<input type="hidden" name="csrf_field" />
-	<button type="submit" value="Submit">Login</button>
-</form>
 
-<a href="/#/registreer">registreer</a>
+<form id="loginform" class="form-horizontal" method="post">
+	<legend>Login</legend>
+	<ul class="formlist">
+		<li class='control-group'>
+			<label class="control-label" for="email">Email</label>
+			<div class="controls">
+				<input type="email" name="email" id="email" />
+			</div>
+		</li>
+		<li class='control-group'>
+			<label class="control-label" for="password">Password</label>
+			<div class="controls">
+				<input type="password" name="password" id="password" />
+			</div>
+		</li>
+		<li class="control-group">
+		    <div class="controls">
+		    	<input type="hidden" name="csrf_field" />
+		    	<button type="submit" value="Submit" class='btn btn-primary'>Login</button>
+		    	<button type="button" class="btn" id="register">Registreer</button>
+		    </div>
+		</li>
+		
+	</ul>
+</form>
