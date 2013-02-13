@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.1.44)
 # Database: sc_db
-# Generation Time: 2013-02-12 20:08:11 +0000
+# Generation Time: 2013-02-13 23:38:04 +0000
 # ************************************************************
 
 
@@ -20,13 +20,45 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+# Dump of table sc_activities
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sc_activities`;
+
+CREATE TABLE `sc_activities` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `author` bigint(20) unsigned DEFAULT NULL,
+  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `content` longtext CHARACTER SET utf8,
+  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `type` varchar(20) CHARACTER SET utf8 DEFAULT 'message',
+  `comment_count` bigint(20) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table sc_login_attempts
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sc_login_attempts`;
+
+CREATE TABLE `sc_login_attempts` (
+  `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+  `time` varchar(30) DEFAULT '',
+  `user_id` bigint(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
 # Dump of table sc_users
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `sc_users`;
 
 CREATE TABLE `sc_users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL DEFAULT '',
   `email` varchar(30) NOT NULL DEFAULT '',
   `password` varchar(265) NOT NULL DEFAULT '',
