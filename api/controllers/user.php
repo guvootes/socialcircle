@@ -1,5 +1,4 @@
-	<?php
-
+<?php
 	Class UserController extends Controller{
 
 		protected 	$user,
@@ -34,8 +33,8 @@
 				}else{
 
 					// Add attempt 
-					$model = new Model;
-					$model->addLoginAttempt($this->user->id);
+					$userModel = new UserModel;
+					$userModel->addLoginAttempt($this->user->id);
 
 					// Return error
 					$name = 'password';
@@ -125,11 +124,11 @@
 			$bcrypt = new Bcrypt(15);
 			
 			// Make new usermodel instance
-			$model = new UserModel();
+			$userModel = new UserModel();
 			
-			if (!$rowCount = $model->getUserByEmail($email)) return false;
+			if (!$rowCount = $userModel->getUserByEmail($email)) return false;
 			
-			$user = $model->getUser();
+			$user = $userModel->getUser();
 			$hash = $user['password'];
 			
 			// Verify password input with database hashs
@@ -163,6 +162,59 @@
 
 		}
 
-	}
+		public function checkUser(){
 
+			if(isset($_SESSION['user'], $_SESSION['loginString'])){
+
+				$this->user = $_SESSION['user'];
+				$this->loginString = $_SESSION['loginString'];
+
+				$ipAddress = $_SERVER['REMOTE_ADDR']; // Get the IP address of the user. 
+     			$userBrowser = $_SERVER['HTTP_USER_AGENT']; // Get the user-agent string of the user.
+
+     			$userModel = new UserModel;
+     			$password = $userModel->getHashById($this->user->id);
+
+     			$loginCheck = hash('sha512', $password.$ipAddress.$userBrowser);
+
+     			if($loginCheck == $this->loginString){
+     				return true;
+     			}
+
+			}else{
+				return false;
+			}
+		}
+
+		public function checkBrute($userId){
+
+			$userModel = new UserModel;
+			$attempts = $userModel->getAttempts($userId);
+
+			if($attempts >= NUMBER_OF_ATTEMPTS){
+				return true;
+			}else{
+				return false;
+			}
+
+		}
+
+
+		public function logOutUser(){
+
+			// Unset all session values
+			$_SESSION = array();
+			
+			// get session parameters 
+			$params = session_get_cookie_params();
+			
+			// Delete the actual cookie.
+			setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+			
+			// Destroy session
+			session_destroy();
+
+		}
+
+	}
 ?>

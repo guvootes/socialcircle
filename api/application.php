@@ -16,6 +16,7 @@ require 'models/user.php';
 // Require controllers
 require 'controllers/controller.php';
 require 'controllers/user.php';
+require 'controllers/activity.php';
 
 
 // Init $app instance
@@ -28,6 +29,7 @@ $app = new Slim();
 // Require Views
 require 'views/user.php';
 require 'views/login.php';
+require 'views/logout.php';
 
 // run Slim
 $app->run();
