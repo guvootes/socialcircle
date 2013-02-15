@@ -17,7 +17,6 @@
 	require 'controllers/user.php';
 	require 'controllers/activity.php';
 
-	Controller::startSecureSession();
 
 		$output = new stdClass;
 

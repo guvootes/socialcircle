@@ -4,6 +4,13 @@
 
 		protected $db;
 
+
+		function __construct() {
+
+			$this->connect();
+			
+		}
+
 		protected function connect(){
 
 			try {

@@ -112,8 +112,8 @@
 			$hash = $bcrypt->hash($data['password']);
 
 			// Make new user model instance and add user
-			$user = new UserModel();
-			$status = $user->addUser(ucfirst($data['username']), strtolower($data['email']), $hash, $data['birthday']);
+			$userModel = new UserModel();
+			$status = $userModel->addUser(ucfirst($data['username']), strtolower($data['email']), $hash, $data['birthday']);
 
 			return $status;
 			

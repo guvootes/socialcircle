@@ -9,6 +9,13 @@
 					$user,
 					$loginString;	
 
+
+		function __construct(){
+
+			$this->startSecureSession();
+
+		}
+
 		public function startSecureSession () {
 
 

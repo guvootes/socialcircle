@@ -3,12 +3,7 @@
 	Class UserModel extends Model {
 	
 		protected $user;
-
-		public function __construct() {
-			$this->connect();
-		}
-
-
+		
 		public function addUser ($username, $email, $password, $birthday, $role = 0) {
 
 			$data[':username'] = $username;
