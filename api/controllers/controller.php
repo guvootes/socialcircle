@@ -48,6 +48,13 @@
 
 		}
 
+		public function sendMail($to, $subject, $content){
+
+			// Send
+			return mail('rick.ootes@gmail.com', 'My Subject', 'test');
+
+		}
+
 	}
 
 ?>

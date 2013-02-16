@@ -10,7 +10,13 @@
 		
 			$errors = array();
 
-			$rowCount = $this->getUserModel($data['email'], $data['password']);
+			// Set Variables
+			$email = (isset($data['email']) && $data['email'] !== '') ? $data['email'] : null;
+
+			// Set Variables
+			$password = (isset($data['password']) && $data['password'] !== '') ? $data['password'] : null;
+
+			$rowCount = $this->getUserModel($email, $password);
 
 			if($rowCount){
 
@@ -115,8 +121,17 @@
 			$userModel = new UserModel();
 			$status = $userModel->addUser(ucfirst($data['username']), strtolower($data['email']), $hash, $data['birthday']);
 
+			// Send verification mail
+			$this->sendVerificationMail();
+
 			return $status;
 			
+		}
+
+		protected function sendVerificationMail(){
+
+			
+
 		}
 
 		protected function getUserModel($email, $password){

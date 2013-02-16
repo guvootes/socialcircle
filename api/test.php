@@ -27,8 +27,10 @@
 
 
 		if(isset($_GET['activity'])):
-			$activity = new ActivityController;
-			$output->activity = $activity->getSession();
+			$activityControler = new ActivityController;
+			$mail = ($activityControler->sendMail(null,null,null)) ? 'send' : 'not send';
+			$output->mail = $mail;
+			$output->activity = $activityControler->getSession();
 		endif;
 
 
@@ -39,7 +41,7 @@
 
 		endif;
 
-		$output->session = $_SESSION;
+		if(isset($_SESSION)) $output->session = $_SESSION;
 
 		
 

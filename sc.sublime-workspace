@@ -4,8 +4,36 @@
 		"selected_items":
 		[
 			[
+				"html",
+				"html	html"
+			],
+			[
 				"json",
 				"json_encode"
+			],
+			[
+				"Date",
+				"DateTime"
+			],
+			[
+				"sess",
+				"session_start"
+			],
+			[
+				"tex",
+				"text-decoration"
+			],
+			[
+				"abs",
+				"absolute"
+			],
+			[
+				"san",
+				"sans-serif"
+			],
+			[
+				"stat",
+				"status"
 			],
 			[
 				"err",
@@ -79,9 +107,21 @@
 	"build_system": "Packages/SASS Build/SASS.sublime-build",
 	"command_palette":
 	{
-		"height": 93.0,
+		"height": 375.0,
 		"selected_items":
 		[
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"set syntax: p",
+				"Set Syntax: PHP"
+			],
+			[
+				"user",
+				"Preferences: Settings - User"
+			],
 			[
 				"javasc",
 				"Set Syntax: JavaScript"
@@ -119,10 +159,6 @@
 				"View: Toggle Open Files in Side Bar"
 			],
 			[
-				"user",
-				"Preferences: Settings - User"
-			],
-			[
 				"user ",
 				"Preferences: Key Bindings - User"
 			],
@@ -144,10 +180,6 @@
 			],
 			[
 				"html ",
-				"Snippet: html5"
-			],
-			[
-				"html",
 				"Snippet: html5"
 			],
 			[
@@ -183,7 +215,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 453.0
+		"width": 561.0
 	},
 	"console":
 	{
@@ -200,14 +232,55 @@
 	},
 	"file_history":
 	[
-		"/Users/rickootes/www/socialcircle/sc-config.sample.php",
-		"/Users/rickootes/www/socialcircle/sc.sublime-project",
+		"/Users/rickootes/www/socialcircle/api/views/emails/generic.php",
+		"/Users/rickootes/www/socialcircle/api/controllers/user.php",
+		"/Users/rickootes/www/socialcircle/api/models/user.php",
+		"/Users/rickootes/www/socialcircle/api/test.php",
+		"/Users/rickootes/www/socialcircle/api/controllers/controller.php",
+		"/Users/rickootes/www/socialcircle/api/views/emails/activation.php",
+		"/Users/rickootes/www/socialcircle/api/controllers/activity.php",
+		"/Users/rickootes/www/socialcircle/api/models/model.php",
+		"/Users/rickootes/www/socialcircle/api/application.php",
 		"/Users/rickootes/www/socialcircle/sc-config.php",
-		"/Users/rickootes/www/socialcircle/test.php",
-		"/Users/rickootes/www/socialcircle/api/classes/bcrypt.php",
-		"/Users/rickootes/www/socialcircle/api/classes/user.php",
+		"/Users/rickootes/www/socialcircle/api/views/logout.php",
+		"/Users/rickootes/www/socialcircle/api/session.php",
+		"/Users/rickootes/www/socialcircle/api/views/user.php",
+		"/Users/rickootes/www/socialcircle/api/views/activities.php",
+		"/Users/rickootes/www/socialcircle/api/libs/user.php",
 		"/Users/rickootes/www/socialcircle/api/index.php",
+		"/Users/rickootes/www/socialcircle/api/libs/bcrypt.php",
+		"/Users/rickootes/www/socialcircle/api/views/login.php",
+		"/Users/rickootes/www/socialcircle/js/views/loginView.js",
+		"/Users/rickootes/www/socialcircle/index.php",
+		"/Users/rickootes/www/socialcircle/templates/login.php",
+		"/Users/rickootes/www/socialcircle/api/libs/model.php",
+		"/Users/rickootes/www/socialcircle/templates/login.html",
+		"/Users/rickootes/www/socialcircle/api/libs/user.model.php",
+		"/Users/rickootes/www/socialcircle/api/classes/user.php",
+		"/Users/rickootes/www/socialcircle/api/classes/bcrypt.php",
+		"/Users/rickootes/www/socialcircle/api/classes/user.model.php",
+		"/Users/rickootes/www/socialcircle/api/classes/model.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/includes/header.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/css/style.css",
+		"/Users/rickootes/www/socialcircle/api-explorer/data.json",
+		"/Users/rickootes/www/socialcircle/sc.sublime-project",
+		"/Users/rickootes/www/socialcircle/api-explorer/index.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/includes/footer.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/includes/sidebar.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/application/core.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/index.bu.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/test.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/application/bootstrap.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/application/config.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/js/adduser.js",
+		"/Users/rickootes/www/socialcircle/api-explorer/application/application.php",
+		"/Users/rickootes/www/socialcircle/api-explorer/data/user.json",
+		"/Users/rickootes/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/rickootes/www/socialcircle/api-explorer/js/script.js",
+		"/Users/rickootes/www/socialcircle/test.php",
+		"/Users/rickootes/www/socialcircle/api/classes/usermodel.php",
 		"/Users/rickootes/www/socialcircle/api/classes/application.php",
+		"/Users/rickootes/www/socialcircle/sc-config.sample.php",
 		"/Users/rickootes/www/socialcircle/api/classes/bcript.php",
 		"/Users/rickootes/www/socialcircle/api/user.php",
 		"/Users/rickootes/www/socialcircle/api/classes/core.php",
@@ -240,7 +313,6 @@
 		"/Users/rickootes/Sites/kringoosterkerk.nl/dev/html/js/modernizr-all.js",
 		"/Users/rickootes/Sites/kringoosterkerk.nl/dev/html/js/script.js",
 		"/Users/rickootes/Documents/studiostomp/studiostomp/template/js/script.js",
-		"/Users/rickootes/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/rickootes/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/rickootes/Documents/studiostomp/eigen-fabrikaat/eigen-fabrikaat/dev/wp/wp-content/themes/eigen-fabrikaat/images/sftp-config.json",
 		"/Users/rickootes/Desktop/Theme - Soda.1/Soda Light.sublime-theme",
@@ -260,6 +332,9 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"/Users/rickootes/www/socialcircle/api/",
+			"/Users/rickootes/www/socialcircle/api/classes",
+			""
 		]
 	},
 	"find_state":
@@ -267,6 +342,52 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"<div>",
+			"div",
+			"/*@editable*/ ",
+			"mc",
+			"*|MC:SUBJECT|*",
+			"this->",
+			"}\n",
+			"je wachtwoord is onjuist",
+			"datetime",
+			"dateTime",
+			"DateTime",
+			"dateTime",
+			"$this->user",
+			"$model",
+			"row",
+			"check passed",
+			"$user",
+			"getUserByEmail",
+			"sth",
+			"cookieParams",
+			"->",
+			"email",
+			"username",
+			"return",
+			"z",
+			"connect",
+			"z",
+			"echo",
+			"z",
+			"href=\"\"",
+			"errors",
+			"rs",
+			"s",
+			"[]",
+			"post",
+			"input",
+			"text",
+			".sidebar",
+			"0",
+			"key",
+			"*",
+			"\"",
+			"'",
+			"?>",
+			"before",
+			"\" :",
 			"'",
 			"stmt",
 			"firstname",
@@ -323,7 +444,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 36.0
 	},
 	"input":
 	{
@@ -393,6 +514,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 242.0,
+	"side_bar_width": 164.0,
 	"status_bar_visible": true
 }
