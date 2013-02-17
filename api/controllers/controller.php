@@ -48,10 +48,30 @@
 
 		}
 
-		public function sendMail($to, $subject, $content){
+		protected function sendMail($email, $username, $subject, $content){
 
-			// Send
-			return mail('rick.ootes@gmail.com', 'My Subject', 'test');
+			$mail  = new PHPMailer();
+			$mail->IsSMTP();
+
+ 
+			$mail->SMTPAuth   = SMTP_AUTH;       
+			$mail->SMTPSecure = SMTP_SECURE;             
+			$mail->Host       = SMTP_HOST;      
+			$mail->Port       = SMTP_PORT;                   
+			$mail->Username   = SMTP_USER; 
+			$mail->Password   = SMTP_PASS; 
+			 
+			$mail->From       = MAIL_FROM;
+			$mail->FromName   = MAIL_NAME;
+			$mail->Subject    = $subject;
+			$mail->MsgHTML($content);
+			 
+			$mail->AddAddress($email,$username);
+			$mail->IsHTML(true);
+			 
+			return $mail->Send();
+
+
 
 		}
 

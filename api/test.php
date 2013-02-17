@@ -7,6 +7,7 @@
 	
 	// Require libraries
 	require 'libs/bcrypt.php';
+	require 'libs/phpmailer/class.phpmailer.php';
 
 	// Require models
 	require 'models/model.php';
@@ -20,6 +21,11 @@
 
 		$output = new stdClass;
 
+		if(isset($_GET['register'])):
+			$user = new UserController;
+			$output->register = json_decode($user->add_user($_GET));
+		endif;
+
 		if(isset($_GET['login'])):
 			$user = new UserController;
 			$output->login = json_decode($user->get_user($_GET));
@@ -28,8 +34,6 @@
 
 		if(isset($_GET['activity'])):
 			$activityControler = new ActivityController;
-			$mail = ($activityControler->sendMail(null,null,null)) ? 'send' : 'not send';
-			$output->mail = $mail;
 			$output->activity = $activityControler->getSession();
 		endif;
 

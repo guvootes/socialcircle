@@ -8,6 +8,7 @@ require 'Slim/Slim.php';
 
 // Require libraries
 require 'libs/bcrypt.php';
+require 'libs/phpmailer/class.phpmailer.php';
 
 // Require models
 require 'models/model.php';
@@ -28,8 +29,7 @@ $app = new Slim();
 
 // Require Views
 require 'views/user.php';
-require 'views/login.php';
-require 'views/logout.php';
+require 'views/activity.php';
 
 // run Slim
 $app->run();
