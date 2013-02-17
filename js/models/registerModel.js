@@ -4,7 +4,7 @@ define([], function(){
 //  			"role"		:  "user"
 //  		},
   
-  		url: 'api/user',
+  		url: 'api/user/register',
   
 		validate: function (attrs) {
 	    	var errors = [];
