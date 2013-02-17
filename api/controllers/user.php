@@ -134,13 +134,35 @@
 
 		protected function sendVerificationMail($email, $username){
 
+			// Set subject
 			$subject = 'Verificatie e-mail';
 
+
+			$body = 'test';
+
+			// Cache the mail template
 			ob_start();
-			include('../views/emails/generic.php');
+			include('views/emails/generic.php');
 			$content = ob_get_contents();
 			ob_end_clean();
 
+
+			// search and replace template tags
+			$search = array(
+				'*|SITENAME|*',
+				'*|SUBJECT|*',
+				'*|BODY|*'
+			);
+
+			$replace = array(
+				SITENAME,
+				$subject,
+				$body
+			);
+
+			$content = str_replace($search, $replace, $content);
+
+			// return if the mail is send (bool)
 			return $this->sendMail($email, $username, $subject, $content);
 
 		}
