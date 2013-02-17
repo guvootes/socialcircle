@@ -2,7 +2,7 @@
 (function () {
 	"use strict";
 	define([
-		'models/userModel',
+		'models/registerModel',
 		'text!templates/register.php',
 		
 	], function (userModel, template) {
