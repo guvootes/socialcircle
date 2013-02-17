@@ -59,6 +59,8 @@
 
 		public function add_user($data){
 
+			return json_encode($data);
+
 			// Set post data to local variables
 			$username = (isset($data['username'])) ? $data['username'] : null;
 			$email = (isset($data['email'])) ? $data['email'] : null;
