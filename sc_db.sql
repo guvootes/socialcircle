@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# Host: 127.0.0.1 (MySQL 5.1.44)
+# Host: 127.0.0.1 (MySQL 5.5.30)
 # Database: sc_db
-# Generation Time: 2013-02-13 23:38:04 +0000
+# Generation Time: 2013-02-17 20:54:02 +0000
 # ************************************************************
 
 
@@ -64,6 +64,7 @@ CREATE TABLE `sc_users` (
   `password` varchar(265) NOT NULL DEFAULT '',
   `birthday` date DEFAULT NULL,
   `role` varchar(10) DEFAULT 'user',
+  `active` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
