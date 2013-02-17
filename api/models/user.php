@@ -4,14 +4,15 @@
 	
 		protected $user;
 		
-		public function addUser ($username, $email, $password, $birthday, $role = 0) {
+		public function addUser ($username, $email, $password, $birthday, $activation_token, $role = 0 ) {
 
 			$data[':username'] = $username;
 			$data[':email'] = $email;
 			$data[':password'] = $password;
 			$data[':birthday'] = $birthday;
-
-			$sql = "INSERT INTO ".DB_PREFIX."users (username, email, password, birthday) VALUES (:username, :email, :password, :birthday)";
+			$data[':activation_token'] = $activation_token;
+	
+			$sql = "INSERT INTO ".DB_PREFIX."users (username, email, password, birthday, activation_token) VALUES (:username, :email, :password, :birthday, :activation_token)";
 
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute($data);

@@ -9,6 +9,7 @@ require 'Slim/Slim.php';
 // Require libraries
 require 'libs/bcrypt.php';
 require 'libs/phpmailer/class.phpmailer.php';
+require 'libs/validator.php';
 
 // Require models
 require 'models/model.php';

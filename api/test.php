@@ -7,6 +7,7 @@
 	
 	// Require libraries
 	require 'libs/bcrypt.php';
+	require 'libs/validator.php';
 	require 'libs/phpmailer/class.phpmailer.php';
 
 	// Require models
@@ -52,6 +53,8 @@
 		echo '<pre>';
 		print_r($output);
 		echo '</pre>';
+
+
 
 
 
