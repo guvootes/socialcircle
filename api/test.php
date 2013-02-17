@@ -7,7 +7,7 @@
 	
 	// Require libraries
 	require 'libs/bcrypt.php';
-	require 'libs/validator.php';
+	require 'libs/validate.php';
 	require 'libs/phpmailer/class.phpmailer.php';
 
 	// Require models

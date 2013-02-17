@@ -68,7 +68,7 @@
 			$errors = array();
 
 			// Check for username length
-			if (Validator::validate_username($username)){
+			if (Validate::username($username)){
 				$name = "username";
 				$message = 'Kies een gebruikersnaam tussen de 4 en 28 tekens lang. Aleen nummers en cijfers toegestaan';
 				array_push($errors, array("message" => $message, "name" => $name));
@@ -83,7 +83,7 @@
 
 
 			// Check for email
-			if(Validator::validate_email($email)){				
+			if(Validate::email($email)){				
 				$name = "email";
 				$message = 'Uw e-mailadres is niet geldig.';
 				array_push($errors, array("message" => $message, "name" => $name));
@@ -97,14 +97,14 @@
 			}
 
 			// Check for password length
-			if (Validator::validate_password($password)) {				
+			if (Validate::password($password)) {				
 				$name = "password";
 				$message = 'Uw wachtwoord is te kort, gebruik minimaal 3 tekens.';
 				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 			// Check birthdate
-			if(Validator::validate_date($birthday)){
+			if(Validate::date($birthday)){
 				$name = "birthday";
 				$message = 'Uw geboortedatum is niet correct ingevoerd';
 				array_push($errors, array("message" => $message, "name" => $name));
