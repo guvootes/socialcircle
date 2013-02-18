@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.30)
 # Database: sc_db
-# Generation Time: 2013-02-17 20:54:02 +0000
+# Generation Time: 2013-02-18 21:43:09 +0000
 # ************************************************************
 
 
@@ -33,6 +33,21 @@ CREATE TABLE `sc_activities` (
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `type` varchar(20) CHARACTER SET utf8 DEFAULT 'message',
   `comment_count` bigint(20) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table sc_forgot_password
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sc_forgot_password`;
+
+CREATE TABLE `sc_forgot_password` (
+  `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+  `time` varchar(30) DEFAULT '',
+  `user_id` bigint(11) DEFAULT NULL,
+  `token` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -65,6 +80,7 @@ CREATE TABLE `sc_users` (
   `birthday` date DEFAULT NULL,
   `role` varchar(10) DEFAULT 'user',
   `active` int(11) DEFAULT '0',
+  `activation_token` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
