@@ -1,0 +1,10 @@
+<html>
+<head>
+	<title>*|SUBJECT|*</title>
+</head>
+<body>
+	<h1>*|SITENAME|*</h1>
+	<h2>*|SUBJECT|*</h2>
+	<p>*|BODY|*</p>
+</body>
+</html>

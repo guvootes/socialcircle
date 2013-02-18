@@ -46,6 +46,28 @@
 
 		endif;
 
+		if(isset($_GET['activate'])):
+
+			$user = new UserController;
+			$output->activate = json_decode( $user->activateUser($_GET) );
+
+		endif;
+
+		if(isset($_GET['forgot'])):
+
+			$user = new UserController;
+			$output->forgot = json_decode( $user->forgotPassword($_GET) );
+
+		endif;
+
+		if(isset($_GET['resetpassword'])):
+
+			$user = new UserController();
+			$output->resetPassword = json_decode($user->newPassword($_GET));
+
+		endif;
+
+
 		if(isset($_SESSION)) $output->session = $_SESSION;
 
 		

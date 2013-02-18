@@ -115,6 +115,62 @@
 
 		}
 
+		public function activate($activation_token){
+
+			$sql = "UPDATE ".DB_PREFIX."users SET active=1 WHERE activation_token =?";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute(array($activation_token));
+
+			return $stmt->rowCount();
+
+		}
+
+		public function resetPassword($token){
+
+			$now = time();
+
+			$data[':id'] = $this->user['id'];
+			$data[':time'] = $now;
+			$data[':token'] = $token;
+
+			$sql = "INSERT INTO ".DB_PREFIX."forgot_password (user_id, time, token) VALUES (:id, :time, :token)";
+
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute($data);
+
+			return $stmt->rowCount();
+
+		}
+
+		public function updatePassword($userId, $password){
+
+			$data[':id'] = $userId;
+			$data[':password'] = $password;
+
+			$sql = "UPDATE ".DB_PREFIX."users SET password = :password WHERE id = :id";
+
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute($data);
+
+			return $stmt->rowCount();
+
+
+		}
+
+		public function getForgetPasswordRow($token){
+
+			$sql = "SELECT user_id, time FROM ".DB_PREFIX."forgot_password WHERE token = ?";
+
+			$stmt = $this->db->prepare($sql); 
+
+			$stmt->bindParam(1, $token, PDO::PARAM_INT);
+			$stmt->execute(); // Execute the prepared query.
+
+			$result = $stmt->fetch();
+			return $result;	
+
+		}
+
 	}
 
 ?>

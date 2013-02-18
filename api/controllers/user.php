@@ -28,7 +28,7 @@
 				}
 
 				// check if account is verificated
-				if(	$this->verification){
+				if($this->verification){
 
 					// Set user in Session and return user object
 					$_SESSION['user'] = $this->user;
@@ -70,14 +70,14 @@
 			// Check for username length
 			if (Validate::username($username)){
 				$name = "username";
-				$message = 'Kies een gebruikersnaam tussen de 4 en 28 tekens lang. Aleen nummers en cijfers toegestaan';
+				$message = 'Kies een gebruikersnaam tussen de 4 en 28 tekens lang. Aleen nummers en cijfers toegestaan.';
 				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
 			// Check if username exists
 			if( $this->in_use('username', $username)){				
 				$name = "username";
-				$message = 'Uw gekozen gebruikersnaam is al in gebruik, kies een andere gebruikersnaam.';
+				$message = 'Uw gekozen gebruikersnaam is al in gebruik.';
 				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
@@ -92,7 +92,7 @@
 			// Check for email
 			if( $this->in_use('email', $email)){
 				$name = "email";
-				$message = 'Uw e-mailadres is al in gebruik';
+				$message = 'Uw e-mailadres is al in gebruik.';
 				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
@@ -119,7 +119,7 @@
 
 
 			// Send verification mail
-			if(!$this->sendVerificationMail($email, $username, $activation_token)):
+			if(!$this->sendActivationMail($email, $username, $activation_token)):
 				$name = "email";
 				$message = 'Je activatie email is niet verzonden';
 				array_push($errors, array("message" => $message, "name" => $name));
@@ -140,17 +140,16 @@
 			
 		}
 
-		protected function sendVerificationMail($email, $username, $activation_token){
+		protected function sendActivationMail($email, $username, $activation_token){
 
 			// Set subject
-			$subject = 'Verificatie e-mail';
-
+			$subject = 'Account activatie e-mail';
 
 			$body = 'The activation token= '.$activation_token;
 
 			// Cache the mail template
 			ob_start();
-			include('views/emails/account-verification.php');
+			include('views/emails/account-activation.php');
 			$content = ob_get_contents();
 			ob_end_clean();
 
@@ -208,7 +207,6 @@
 
 			return $rowCount;
 			
-			
 		}
 
 		protected function in_use($key, $value) {
@@ -242,6 +240,178 @@
 			}
 		}
 
+		public function activateUser($activation_token){
+
+			$errors = array();
+			
+			if(!$activation_token){
+				$name = "activatie";
+				$message = 'uw account kon niet worden geactiveerd wegens gebrekkige data';
+				array_push($errors, array("message" => $message, "name" => $name));
+			}
+
+			if(!empty($errors))	return json_encode($errors);
+
+			$userModel = new UserModel();
+			if($userModel->activate($activation_token)){
+				
+				return true;
+
+			}else{
+
+				$name = "activatie";
+				$message = 'Uw account kon niet worden geactiveerd.';
+				array_push($errors, array("message" => $message, "name" => $name));				
+
+			}
+
+			if(!empty($errors))	return json_encode($errors);
+
+		}
+
+		public function forgotPassword($data){
+
+			$errors = array();
+			$email = (isset($data['email'])) ? $data['email'] : null;
+
+			if(!$email){
+				$name = "activatie";
+				$message = 'Uw wachtwoord kon niet worden vernieuwd';
+				array_push($errors, array("message" => $message, "name" => $name));
+			}
+
+			// Return errors 
+			if(!empty($errors))	return json_encode($errors);
+
+			$forgot_password_token = md5(rand(0,1000));
+			
+			$userModel = new UserModel;
+
+			if(!$userModel->getUserByEmail($email)){
+				
+				$name = "password reset";
+				$message = 'Er is geen gebruiker bekend met het opgegeven e-mailadres';
+				array_push($errors, array("message" => $message, "name" => $name));
+
+			}else{
+
+					if($userModel->resetPassword($forgot_password_token)){
+						$user = $userModel->getUser();
+						$mail = $this->sendForgotPasswordMail($forgot_password_token, $user);
+					}
+
+				if(!$mail){
+					$name = "password reset";
+					$message = 'Er heeft zich een fout opgetreden bij het versturen van de e-mail';
+					array_push($errors, array("message" => $message, "name" => $name));					
+				}else{
+					return $mail;
+				}
+
+
+			}
+
+			// Return errors 
+			if(!empty($errors))	return json_encode($errors);
+
+		}
+
+
+		public function newPassword($data){
+
+			$errors = array();
+
+			// Set Variables
+			$token = (isset($data['token']) && $data['token'] !== '') ? $data['token'] : null;
+			$password = (isset($data['password']) && $data['password'] !== '') ? $data['password'] : null;
+
+			if(!$token){
+				$name = "token";
+				$message = 'Een token is vereist om deze actie te kunnen doen.';
+				array_push($errors, array("message" => $message, "name" => $name));					
+			}
+
+			// Check for password length
+			if (Validate::password($password)) {				
+				$name = "password";
+				$message = 'Uw wachtwoord is te kort, gebruik minimaal 3 tekens.';
+				array_push($errors, array("message" => $message, "name" => $name));
+			}
+
+			// Return errors 
+			if(!empty($errors))	return json_encode($errors);
+
+			$userModel = new UserModel;
+			$row = $userModel->getForgetPasswordRow($token);
+
+			// All login attempts are counted from the past half hour. 
+			$now = time();
+		   	$expired = $now - (30 * 60); 
+
+			if(!$row){
+				$name = "token";
+				$message = 'Uw token is ongeldig.';
+				array_push($errors, array("message" => $message, "name" => $name));				
+			}elseif($row['time'] < $expired ){
+				$name = "token";
+				$message = 'Uw token is verlopen.';
+				array_push($errors, array("message" => $message, "name" => $name));								
+			}
+
+			// Return errors 
+			if(!empty($errors))	return json_encode($errors);
+
+
+			return $this->updatePassword($row['user_id'],$password);
+
+		}
+
+		protected function updatePassword($userId, $password){
+
+			$bcrypt = new Bcrypt(15);
+			$hash = $bcrypt->hash($password);
+
+			$userModel = new UserModel;
+
+			return $userModel->updatePassword($userId, $hash);
+
+		}
+
+		protected function sendForgotPasswordMail($token, $user){
+
+			// Set subject
+			$subject = 'Password vergeten';
+
+			$body = 'The reset token= '.$token;
+
+			// Cache the mail template
+			ob_start();
+			include('views/emails/forgot-password.php');
+			$content = ob_get_contents();
+			ob_end_clean();
+
+
+			// search and replace template tags
+			$search = array(
+				'*|SITENAME|*',
+				'*|SUBJECT|*',
+				'*|BODY|*'
+			);
+
+			$replace = array(
+				SITENAME,
+				$subject,
+				$body
+			);
+
+			$content = str_replace($search, $replace, $content);
+
+			// return if the mail is send (bool)
+			return $this->sendMail($user['email'], $user['username'], $subject, $content);
+
+		}
+
+
 		public function checkBrute($userId){
 
 			$userModel = new UserModel;
@@ -271,6 +441,8 @@
 			session_destroy();
 
 		}
+
+
 
 	}
 ?>
