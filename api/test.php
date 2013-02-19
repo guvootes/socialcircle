@@ -35,7 +35,6 @@
 
 		if(isset($_GET['activity'])):
 			$activityControler = new ActivityController;
-			$output->activity = $activityControler->getSession();
 		endif;
 
 
