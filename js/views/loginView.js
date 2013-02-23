@@ -37,8 +37,14 @@
 				 				 
 				newLogin.save(newLogin.toJSON(),{
 					success: function(model, response){
+					
 						console.log(model, response);
 						self.showResponse(response);
+						
+						
+						// 
+						window.location.hash = "/activiteiten";
+						
 					},
 					
 					error: function(model, response){

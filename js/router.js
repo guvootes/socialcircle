@@ -3,12 +3,14 @@
 	
 	define([
 		'views/registerView',
-		'views/loginView'
-	], function(registerView, loginView) {
+		'views/loginView',
+		'views/activitiesView'
+	], function(registerView, loginView, activitiesView) {
 		var AppRouter = Backbone.Router.extend({
 			
 			routes: {
 				'/registreer'		:	'showRegister',
+				'/activiteiten'		:	'showActivities',
 				'*path'				: 	'defaultAction'
 			},
 
@@ -20,6 +22,10 @@
 			
 			showRegister: function(){
 				registerView.render();
+			},
+			
+			showActivities: function(){
+				activitiesView.render();
 			}
 			
 			
