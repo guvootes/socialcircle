@@ -1,44 +1,43 @@
 <?php 
 	Class ActivityController extends Controller{
 
-		protected $authentication;
+		public function getActivities($page = 0, $limit = 10){
 
-
-		protected function authenticate(){
 
 			$errors = array();
 
-			$this->authentication = UserController::checkUser();
+			if(!$this->authenticate()){
 
-			if(!$this->authentication){
+				$this->app->response()->status(400);
+
 				$name = 'Authenticatie';
 				$message = 'Je hebt geen rechten om deze pagina te bekijken';
 				array_push($errors, array("message" => $message, "name" => $name));
 				return json_encode($errors);
+
 			}
 
-			if(!empty($errors))	return json_encode($errors);
-
-			// if the're no error return true
-			return $this->authentication;
-
-		}
-
-		public function getActivities($amount, $offset){
+			$offset = ($page -1) * $limit;
 
 			$activityModel = new ActivityModel;
-			return $activityModel->fetchActivities($amount, $offset);
+
+
+			// count row for total activities
+			$total = $activityModel->countActivities();
+			$totalPages  = ceil($total / $limit);
+
+
+
+			$response = new stdClass;
+
+			$response->posts = $activityModel->fetchActivities($limit, $offset);
+			$response->total = $total;
+			$response->totalPages = $totalPages;
+ 
+
+			return json_encode($response);
 
 		}
-
-		public function getActivity($id){
-
-
-		}
-
-
-
-
 
 	}
 

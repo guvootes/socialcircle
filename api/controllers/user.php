@@ -112,7 +112,10 @@
 
 
 			// check if email and username are provided and return errors if they exists
-			if(!empty($errors))	return json_encode($errors);
+			if(!empty($errors)):
+				$this->app->response()->status(400);
+				return json_encode($errors);
+			endif;
 
 			// Make activation token
 			$activation_token = md5(rand(0,1000));
@@ -126,7 +129,10 @@
 			endif;
 
 			// return errors if they exists
-			if(!empty($errors))	return json_encode($errors);
+			if(!empty($errors)):
+				$this->app->response()->status(400);
+				return json_encode($errors);
+			endif;
 
 			// Encript password
 			$bcrypt = new Bcrypt(15);
@@ -149,7 +155,7 @@
 
 			// Cache the mail template
 			ob_start();
-			include('views/emails/account-activation.php');
+			include('../views/emails/account-activation.php');
 			$content = ob_get_contents();
 			ob_end_clean();
 
@@ -250,7 +256,10 @@
 				array_push($errors, array("message" => $message, "name" => $name));
 			}
 
-			if(!empty($errors))	return json_encode($errors);
+			if(!empty($errors)):
+				$this->app->response()->status(400);
+				return json_encode($errors);
+			endif;
 
 			$userModel = new UserModel();
 			if($userModel->activate($activation_token)){
@@ -265,7 +274,10 @@
 
 			}
 
-			if(!empty($errors))	return json_encode($errors);
+			if(!empty($errors)):
+				$this->app->response()->status(400);
+				return json_encode($errors);
+			endif;
 
 		}
 
@@ -281,7 +293,10 @@
 			}
 
 			// Return errors 
-			if(!empty($errors))	return json_encode($errors);
+			if(!empty($errors)):
+				$this->app->response()->status(400);
+				return json_encode($errors);
+			endif;
 
 			$forgot_password_token = md5(rand(0,1000));
 			
@@ -312,7 +327,10 @@
 			}
 
 			// Return errors 
-			if(!empty($errors))	return json_encode($errors);
+			if(!empty($errors)):
+				$this->app->response()->status(400);
+				return json_encode($errors);
+			endif;
 
 		}
 
@@ -339,7 +357,10 @@
 			}
 
 			// Return errors 
-			if(!empty($errors))	return json_encode($errors);
+			if(!empty($errors)):
+				$this->app->response()->status(400);
+				return json_encode($errors);
+			endif;
 
 			$userModel = new UserModel;
 			$row = $userModel->getForgetPasswordRow($token);
@@ -359,7 +380,10 @@
 			}
 
 			// Return errors 
-			if(!empty($errors))	return json_encode($errors);
+			if(!empty($errors)):
+				$this->app->response()->status(400);
+				return json_encode($errors);
+			endif;
 
 
 			return $this->updatePassword($row['user_id'],$password);
@@ -386,7 +410,7 @@
 
 			// Cache the mail template
 			ob_start();
-			include('views/emails/forgot-password.php');
+			include('../views/emails/forgot-password.php');
 			$content = ob_get_contents();
 			ob_end_clean();
 

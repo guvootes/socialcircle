@@ -13,6 +13,7 @@
 	// Require models
 	require 'models/model.php';
 	require 'models/user.php';
+	require 'models/activity.php';
 
 	// Require controllers
 	require 'controllers/controller.php';
@@ -34,7 +35,12 @@
 
 
 		if(isset($_GET['activity'])):
-			$activityControler = new ActivityController;
+
+			$page = (isset($_GET['page'])) ? $_GET['page'] : 0;
+
+
+			$activityController = new ActivityController;
+			$output->activity =  json_decode($activityController->getActivities());
 		endif;
 
 

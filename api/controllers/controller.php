@@ -2,15 +2,12 @@
 
 	Class Controller {
 
-		protected 	$session,
-					$secure,
-					$httponly,
-					$cookieParams,
-					$user,
-					$loginString;	
+		protected 	$app;	
 
 
-		function __construct(){
+		function __construct($app){
+
+			$this->app = $app;
 
 			$this->startSecureSession();
 
@@ -72,6 +69,14 @@
 			return $mail->Send();
 
 
+
+		}
+
+		protected function authenticate(){
+
+			$authentication = UserController::checkUser();
+
+			return $authentication;
 
 		}
 

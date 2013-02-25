@@ -6,7 +6,7 @@
     	$requestBody = $app->request()->getBody();  // <- getBody() of http request
     	$post = json_decode($requestBody, true);
 
-    	$user = new UserController();
+    	$user = new UserController($app);
     	echo $user->add_user($post);
 
 	});
@@ -17,7 +17,7 @@
 		$requestBody = $app->request()->getBody();  // <- getBody() of http request
 		$post = json_decode($requestBody, true);
 		
-		$user = new UserController();
+		$user = new UserController($app);
 		echo $user->get_user($post);
 	
 	});
@@ -26,7 +26,7 @@
 		
 		$app->response()->header("Content-Type", "application/json");
 
-		$user = new UserController();
+		$user = new UserController($app);
 		echo $user->logOutUser();
 	
 	});
@@ -35,7 +35,7 @@
 		
 		$app->response()->header("Content-Type", "application/json");
 
-		$user = new UserController();
+		$user = new UserController($app);
 		echo $user->activateUser($token);
 	
 	});
@@ -47,7 +47,7 @@
 		$requestBody = $app->request()->getBody();  // <- getBody() of http request
 		$post = json_decode($requestBody, true);
 
-		$user = new UserController();
+		$user = new UserController($app);
 		echo $user->forgotPassword($post);
 	
 	});
@@ -59,7 +59,7 @@
 		$requestBody = $app->request()->getBody();  // <- getBody() of http request
 		$post = json_decode($requestBody, true);
 
-		$user = new UserController();
+		$user = new UserController($app);
 		echo $user->newPassword($post);
 	
 	});
